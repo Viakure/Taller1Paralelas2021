@@ -21,6 +21,7 @@ struct datosEstudiantes
     float promedio_tecnologia;
     float promedio_artes;
     float promedio_edfisica;
+    float promedio_general;
 
     //Asignar dato
     void setId(string num){id = num;}
@@ -33,6 +34,9 @@ struct datosEstudiantes
     void setPromedioTecnologia(float avg_tec){promedio_tecnologia = avg_tec;}
     void setPromedioArtes(float avg_art){promedio_artes = avg_art;}
     void setPromedioEdfisica(float avg_edfis){promedio_edfisica = avg_edfis;}
+    void setPromedioGeneral(){promedio_general = (promedio_lenguaje + promedio_ingles + promedio_matematicas + promedio_ciencias
+                            + promedio_historia + promedio_tecnologia + promedio_artes + promedio_edfisica)/8;}
+    void setPromedioGeneral_valor(float avg){promedio_general = avg;}
 
     //Obtener dato
     const string getId(){return id;}
@@ -45,12 +49,14 @@ struct datosEstudiantes
     const float getPromedioTecnologia(){return promedio_tecnologia;}
     const float getPromedioArtes(){return promedio_artes;}
     const float getPromedioEdfisica(){return promedio_edfisica;}
+    const float getPromedioGeneral(){return promedio_general;}
 };
 
 //vector<string> leer_archivo();
 void leer();
 string cambiar_comilla_por_cero(string sentencia);
 vector<datosEstudiantes> llenar_struct(string archivo);
+vector<datosEstudiantes> Orden_MayorMenor(vector<datosEstudiantes> struct_total);
 
 
 #endif /* FUNCIONES_H */
