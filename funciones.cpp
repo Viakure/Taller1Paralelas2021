@@ -1,7 +1,8 @@
 #include "funciones.h"
+
 using namespace std;
 
- vector<string> leer_archivo()
+vector<string> leer_archivo()
 {
     ifstream archivo("estudiantes.csv");
     string line = "";
@@ -31,60 +32,60 @@ string cambiar_comilla_por_cero(string sentencia)
     }
     string resultado = string_sin_comillas;
     return resultado;
-}
-
-struct datosEstudiantes
-{
-    string id;
-    string nombre;
-    float promedio_lenguaje;
-    float promedio_ingles;
-    float promedio_matematicas;
-    float promedio_ciencias;
-    float promedio_historia;
-    float promedio_tecnologia;
-    float promedio_artes;
-    float promedio_edfisica;
-
-};
-
-
-
-
-/*void leer()
-{
-    ifstream infile("estudiantes.csv");
-    string line = "";
-    string id,prom_lenguaje,prom_ingles,prom_mat,prom_ciencias,prom_hist,prom_tec,prom_art,prom_edfis;
-    string nombre,final;
-    vector<string> datos_csv;
-    vector<string> id_nombre_leng;
-    vector<string> arreglo;
-    while(getline(infile, line))
-    {
-        getline(infile, id, ';');
-        getline(infile, nombre, ';');
-        getline(infile, prom_lenguaje, ';');
-        getline(infile, prom_ingles, ';');
-        getline(infile, prom_mat, ';');
-        getline(infile, prom_ciencias, ';');
-        getline(infile, prom_hist, ';');
-        getline(infile, prom_tec, ';');
-        getline(infile, prom_art, ';');
-        getline(infile, prom_edfis, ';');
-
-
-        stringstream strstr(line);
-        string word="";
-        //while(getline(strstr,word, ';'))
-        //{
-        //    datos_csv.push_back(word);
-        //}
-
     }
 
-    //for(int i=0; i<datos_csv.size() ;i++)
-    //{
-      //  cout<<datos_csv.at(i)<<"\n";
-   // }  
-}*/
+
+
+vector<datosEstudiantes> llenar_struct(string archivo)
+{
+    vector<datosEstudiantes> result;
+    datosEstudiantes *estudiante = new datosEstudiantes[15000];
+    ifstream lectura;
+    lectura.open(archivo);
+    int cont=0;
+    for (string linea; getline(lectura, linea); )
+    {
+        stringstream registro(linea);
+        string dato;
+        cont++;
+        for (int columna=0 ; getline(registro, dato, ';'); ++columna)
+        {
+            switch(columna)
+            {
+                case 0: //ID
+                    estudiante[cont].id = dato;
+                break;
+                case 1: // NOMBRE
+                    estudiante[cont].nombre = dato;
+                break;
+                case 2: // PROMEDIO LENGUAJE
+                    estudiante[cont].promedio_lenguaje = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 3: // PROMEDIO INGLES
+                    estudiante[cont].promedio_ingles = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 4: // PROMEDIO MATEMATICAS
+                    estudiante[cont].promedio_matematicas = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 5: // PROMEDIO CIENCIAS
+                    estudiante[cont].promedio_ciencias = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 6: // PROMEDIO HISTORIA
+                    estudiante[cont].promedio_historia = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 7: // PROMEDIO TECNOLOGIA
+                    estudiante[cont].promedio_tecnologia = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 8: // PROMEDIO ARTES
+                    estudiante[cont].promedio_artes = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 9: // PROMEDIO ED. FISICA
+                    estudiante[cont].promedio_edfisica = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+            }       
+        }
+        result.push_back(estudiante[cont-1]);
+    }
+    return result;
+        
+}
