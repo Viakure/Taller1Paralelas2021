@@ -49,28 +49,28 @@ int main(int argc, char** argv)
                 case 1: // NOMBRE
                     estudiante[cont].nombre = dato;
                 break;
-                case 2: // lenguaje
+                case 2: // PROMEDIO LENGUAJE
                     estudiante[cont].promedio_lenguaje = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 3: // ingles
+                case 3: // PROMEDIO INGLES
                     estudiante[cont].promedio_ingles = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 4: // matematicas
+                case 4: // PROMEDIO MATEMATICAS
                     estudiante[cont].promedio_matematicas = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 5: // ciencias
+                case 5: // PROMEDIO CIENCIAS
                     estudiante[cont].promedio_ciencias = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 6: // historia
+                case 6: // PROMEDIO HISTORIA
                     estudiante[cont].promedio_historia = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 7: // tecnologia
+                case 7: // PROMEDIO TECNOLOGIA
                     estudiante[cont].promedio_tecnologia = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 8: // artes
+                case 8: // PROMEDIO ARTES
                     estudiante[cont].promedio_artes = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
-                case 9: // edfisica
+                case 9: // PROMEDIO ED. FISICA
                     estudiante[cont].promedio_edfisica = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
             }       
