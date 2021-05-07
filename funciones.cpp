@@ -538,9 +538,9 @@ vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudian
     return resultado;
 }
 
-void llenar_csv(vector<datosEstudiantes> e, int opcion)
+void llenar_csv(vector<datosEstudiantes> e, int opcion)                                         //Funcion que crea los archivos .CSV
 {
-    fstream archivo;
+    fstream archivo;                                                                            //Opcion de los 100 mejores promedios
     if (opcion == 1)
     {
         fstream CreateFile("maximos.csv", ios::out);
@@ -552,7 +552,7 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)
         }
         archivo.close();
     }
-    if (opcion == 2)
+    if (opcion == 2)                                                                            //Opcion de los 100 mejores estudiantes artisticos
     {
         fstream CreateFile("artistico.csv", ios::out);
         CreateFile << "ID;Nombre;promedio arte y edfisica" << endl;
@@ -563,7 +563,7 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)
         }
         archivo.close();
     }
-    if (opcion == 3)
+    if (opcion == 3)                                                                            //Opcion de los 100 mejores estudiantes humanistas
     {
         fstream CreateFile("humanismo.csv", ios::out);
         CreateFile << "ID;Nombre;promedio lengua e historia" << endl;
@@ -574,7 +574,7 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)
         }
         archivo.close();
     }
-    if (opcion == 4)
+    if (opcion == 4)                                                                            //Opcion de los 100 mejores estudiantes tecnicos
     {
         fstream CreateFile("tecnicos.csv", ios::out);
         CreateFile << "ID;Nombre;promedio tecnologia, matematicas y ciencias naturales" << endl;
