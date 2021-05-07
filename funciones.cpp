@@ -545,25 +545,27 @@ vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudian
     return resultado;
 }
 
-void llenar_csv(vector<datosEstudiantes> e, int opcion)                                         //Funcion que crea los archivos .CSV
+void llenar_csv(vector<datosEstudiantes> e, int opcion, string ruta)
 {
-    fstream archivo;                                                                            //Opcion de los 100 mejores promedios
-    if (opcion == 1)
-    {
-        fstream CreateFile("maximos.csv", ios::out);                                            //Asignacion de nombre al .CSV
-        CreateFile << "ID;Nombre;promedio general" << endl;                                     //Creando las columnas del .CSV
-        archivo.open("maximos.csv", ios::app);
+    fstream archivo;
+    if (opcion == 1)                                                                           //Opcion de los 100 mejores promedios
+    {   
+        string ubicacion = ruta.append("maximos.csv");  
+        fstream CreateFile(ubicacion, ios::out);                                                //Crea el .CSV en la ubicacion del .CSV de origen
+        CreateFile << "ID;Nombre;promedio general" << endl;                                    //Creando las columnas del .CSV
+        archivo.open(ubicacion, ios::app);  
         for (int i = 0; i < 100; i++)                                                           //Llenando el archivo según estudiantes solicitados
         {
-            archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].promedio_general << endl;   
+            archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].promedio_general << endl;
         }
         archivo.close();
     }
-    if (opcion == 2)                                                                            //Opcion de los 100 mejores estudiantes artisticos
+    if (opcion == 2)                                                                            //Opcion de los 100 mejores estudiantes artisticos                                                                            
     {
-        fstream CreateFile("artistico.csv", ios::out);
+        string ubicacion = url.append("artistico.csv");
+        fstream CreateFile(ubicacion, ios::out);
         CreateFile << "ID;Nombre;promedio arte y edfisica" << endl;
-        archivo.open("artistico.csv", ios::app);
+        archivo.open(ubicacion, ios::app);
         for (int i = 0; i < 100; i++)
         {
             archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].getPromedioArtesyEdfisica() << endl;
@@ -572,9 +574,10 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)                         
     }
     if (opcion == 3)                                                                            //Opcion de los 100 mejores estudiantes humanistas
     {
-        fstream CreateFile("humanismo.csv", ios::out);
+        string ubicacion = url.append("humanismo.csv");
+        fstream CreateFile(ubicacion, ios::out);
         CreateFile << "ID;Nombre;promedio lengua e historia" << endl;
-        archivo.open("humanismo.csv", ios::app);
+        archivo.open(ubicacion, ios::app);
         for (int i = 0; i < 100; i++)
         {
             archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].getPromedioLenguayHistoria() << endl;
@@ -583,9 +586,10 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)                         
     }
     if (opcion == 4)                                                                            //Opcion de los 100 mejores estudiantes tecnicos
     {
-        fstream CreateFile("tecnicos.csv", ios::out);
+        string ubicacion = url.append("tecnicos.csv");
+        fstream CreateFile(ubicacion, ios::out);
         CreateFile << "ID;Nombre;promedio tecnologia, matematicas y ciencias naturales" << endl;
-        archivo.open("tecnicos.csv", ios::app);
+        archivo.open(ubicacion, ios::app);
         for (int i = 0; i < 100; i++)
         {
             archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].getPromedioTecMateCiencias() << endl;
@@ -593,3 +597,32 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)                         
         archivo.close();
     }
 }
+
+string obtener_ruta(string ruta)                    //Permite obtener la ruta
+{
+    int cantidad = ruta.size() - 1;
+    int estudiantescsv = ruta.size() - 16;
+    for(int i = cantidad; i > estudiantescsv; i--)
+    {
+        ruta.pop_back();
+    }
+    return ruta;
+}
+
+/*string obtener_url(string url_completa)
+{
+    string url;
+    for(int i = url_completa.length(); i<0; i--)
+    {
+        if(url_completa[i] == "/" )
+        {
+            url = url_completa;
+            break;
+        }
+        else
+        {
+            url_completa.pop_back();
+        }
+    }
+    return url;
+}*/
