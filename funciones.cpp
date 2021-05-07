@@ -2,23 +2,6 @@
 
 using namespace std;
 
-vector<string> leer_archivo()
-{
-    ifstream archivo("estudiantes.csv");
-    string line = "";
-
-    vector<string> datos_csv;
-    while(getline(archivo, line))
-    {
-        stringstream strstr(line);
-        string word="";
-        while(getline(strstr,word, ','))
-        {
-            datos_csv.push_back(word);
-        }
-    }
-    return datos_csv;
-}
 
 string cambiar_comilla_por_cero(string sentencia)
 {
@@ -85,14 +68,21 @@ vector<datosEstudiantes> llenar_struct(string archivo)
             }       
         }
         estudiante[cont].setPromedioGeneral();
-        result.push_back(estudiante[cont-1]);
+        result.push_back(estudiante[cont]);
     }
     return result;
         
 }
 
-vector<datosEstudiantes> Orden_MayorMenor(vector<datosEstudiantes> struct_total)
+vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct_total,int opcion_de_promedio)
 {
+    /* 
+    OPCION DE ORDEN:
+        1: promedio general
+        2: Promedio Arte y edFisica
+        3: Promedio Lengua y Historia
+        4: Promedio Tecnología Mate y Ciencias
+    */
     vector<datosEstudiantes> struct_ordenado;
     string aux_id,aux_nombre;
     float aux_proml,aux_promi,aux_promm,aux_promc,aux_promh,aux_proma,aux_promt,aux_prome,aux_promg;
@@ -100,48 +90,450 @@ vector<datosEstudiantes> Orden_MayorMenor(vector<datosEstudiantes> struct_total)
     {
         for (unsigned int j = i+1; j<struct_total.size();j++)
         {
-            if (struct_total[i].getPromedioGeneral()<struct_total[j].getPromedioGeneral())
+            if (opcion_de_promedio == 1)
             {
-                aux_promg = struct_total[j].getPromedioGeneral();
-                aux_id = struct_total[j].getId();
-                aux_nombre = struct_total[j].getNombre();
-                aux_proml = struct_total[j].getPromedioLenguaje();
-                aux_promi = struct_total[j].getPromedioIngles();
-                aux_promm = struct_total[j].getPromedioMatematicas();
-                aux_promc = struct_total[j].getPromedioCiencias();
-                aux_promh = struct_total[j].getPromedioHistoria();
-                aux_proma = struct_total[j].getPromedioArtes();
-                aux_promt = struct_total[j].getPromedioTecnologia();
-                aux_prome = struct_total[j].getPromedioEdfisica();
+                if (struct_total[i].getPromedioGeneral()<struct_total[j].getPromedioGeneral())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
 
-                struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
-                struct_total[j].setId(struct_total[i].getId());
-                struct_total[j].setNombre(struct_total[i].getNombre());
-                struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
-                struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
-                struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
-                struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
-                struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
-                struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
-                struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
-                struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
 
-                struct_total[i].setPromedioGeneral_valor(aux_promg);
-                struct_total[i].setId(aux_id);
-                struct_total[i].setNombre(aux_nombre);
-                struct_total[i].setPromedioLenguaje(aux_proml);
-                struct_total[i].setPromedioIngles(aux_promi);
-                struct_total[i].setPromedioMatematicas(aux_promm);
-                struct_total[i].setPromedioCiencias(aux_promc);
-                struct_total[i].setPromedioHistoria(aux_promh);
-                struct_total[i].setPromedioArtes(aux_proma);
-                struct_total[i].setPromedioTecnologia(aux_promt);
-                struct_total[i].setPromedioEdfisica(aux_prome);
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+            if (opcion_de_promedio == 2)
+            {
+                if (struct_total[i].getPromedioArtesyEdfisica()<struct_total[j].getPromedioArtesyEdfisica())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
 
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
 
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+            if (opcion_de_promedio == 3)
+            {
+                if (struct_total[i].getPromedioLenguayHistoria()<struct_total[j].getPromedioLenguayHistoria())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+            if (opcion_de_promedio == 4)
+            {
+                if (struct_total[i].getPromedioTecMateCiencias()<struct_total[j].getPromedioTecMateCiencias())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
             }
         }
-        struct_ordenado.push_back(struct_total[i]);
+        
+    }
+    for (unsigned int k = 0; k<100 ; k++)
+    {
+        struct_ordenado.push_back(struct_total[k]);
     }
     return struct_ordenado;
+}
+
+vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_total, int opcion_de_orden)
+{
+    /* 
+    OPCION DE ORDEN:
+        1: promedio general
+        2: Promedio Arte y edFisica
+        3: Promedio Lengua y Historia
+        4: Promedio Tecnología Mate y Ciencias
+        5: POR ID
+    */
+    vector<datosEstudiantes> struct_ordenado;
+    string aux_id,aux_nombre;
+    float aux_proml,aux_promi,aux_promm,aux_promc,aux_promh,aux_proma,aux_promt,aux_prome,aux_promg;
+    for (unsigned int i=0;i<struct_total.size();i++)
+    {
+        for (unsigned int j = i+1; j<struct_total.size();j++)
+        {
+            if (opcion_de_orden == 1)
+            {
+                if (struct_total[i].getPromedioGeneral()<struct_total[j].getPromedioGeneral())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+
+            if (opcion_de_orden == 2)
+            {
+                if (struct_total[i].getPromedioArtesyEdfisica()<struct_total[j].getPromedioArtesyEdfisica())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+            if (opcion_de_orden == 3)
+            {
+                if (struct_total[i].getPromedioLenguayHistoria()<struct_total[j].getPromedioLenguayHistoria())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+            if (opcion_de_orden == 4)
+            {
+                if (struct_total[i].getPromedioTecMateCiencias()<struct_total[j].getPromedioTecMateCiencias())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+            if (opcion_de_orden == 5)
+            {
+                /*int x,y;
+                x = struct_total[i].getIdInt();
+                y = struct_total[j].getIdInt();*/
+                if (struct_total[i].getNombre()>struct_total[j].getNombre())
+                {
+                    aux_promg = struct_total[j].getPromedioGeneral();
+                    aux_id = struct_total[j].getId();
+                    aux_nombre = struct_total[j].getNombre();
+                    aux_proml = struct_total[j].getPromedioLenguaje();
+                    aux_promi = struct_total[j].getPromedioIngles();
+                    aux_promm = struct_total[j].getPromedioMatematicas();
+                    aux_promc = struct_total[j].getPromedioCiencias();
+                    aux_promh = struct_total[j].getPromedioHistoria();
+                    aux_proma = struct_total[j].getPromedioArtes();
+                    aux_promt = struct_total[j].getPromedioTecnologia();
+                    aux_prome = struct_total[j].getPromedioEdfisica();
+
+                    struct_total[j].setPromedioGeneral_valor(struct_total[i].getPromedioGeneral());
+                    struct_total[j].setId(struct_total[i].getId());
+                    struct_total[j].setNombre(struct_total[i].getNombre());
+                    struct_total[j].setPromedioLenguaje(struct_total[i].getPromedioLenguaje());
+                    struct_total[j].setPromedioIngles(struct_total[i].getPromedioIngles());
+                    struct_total[j].setPromedioMatematicas(struct_total[i].getPromedioMatematicas());
+                    struct_total[j].setPromedioCiencias(struct_total[i].getPromedioCiencias());
+                    struct_total[j].setPromedioHistoria(struct_total[i].getPromedioHistoria());
+                    struct_total[j].setPromedioArtes(struct_total[i].getPromedioArtes());
+                    struct_total[j].setPromedioTecnologia(struct_total[i].getPromedioTecnologia());
+                    struct_total[j].setPromedioEdfisica(struct_total[i].getPromedioEdfisica());
+
+                    struct_total[i].setPromedioGeneral_valor(aux_promg);
+                    struct_total[i].setId(aux_id);
+                    struct_total[i].setNombre(aux_nombre);
+                    struct_total[i].setPromedioLenguaje(aux_proml);
+                    struct_total[i].setPromedioIngles(aux_promi);
+                    struct_total[i].setPromedioMatematicas(aux_promm);
+                    struct_total[i].setPromedioCiencias(aux_promc);
+                    struct_total[i].setPromedioHistoria(aux_promh);
+                    struct_total[i].setPromedioArtes(aux_proma);
+                    struct_total[i].setPromedioTecnologia(aux_promt);
+                    struct_total[i].setPromedioEdfisica(aux_prome);
+                }
+            }
+        }
+        
+    }
+    for (unsigned int k = 0; k<struct_total.size() ; k++)
+    {
+        struct_ordenado.push_back(struct_total[k]);
+    }
+    return struct_ordenado;
+}
+
+vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudiantes> struct_total, vector<datosEstudiantes> struct_seleccionados)
+{
+    vector<datosEstudiantes> resultado;
+    float cero = 0.0;
+    for (unsigned int i=0;i<struct_seleccionados.size();i++)
+    {
+        string aux = struct_seleccionados[i].getId();
+        for (unsigned int j=0;j<struct_total.size();j++)
+        {
+            if (struct_total[j].getId() == aux )
+            {
+                struct_total[j].setId("eliminado");
+                struct_total[j].setNombre("eliminado");
+                struct_total[j].setPromedioGeneral_valor(cero);
+                struct_total[j].setPromedioLenguaje(cero);
+                struct_total[j].setPromedioIngles(cero);
+                struct_total[j].setPromedioMatematicas(cero);
+                struct_total[j].setPromedioCiencias(cero);
+                struct_total[j].setPromedioHistoria(cero);
+                struct_total[j].setPromedioTecnologia(cero);
+                struct_total[j].setPromedioArtes(cero);
+                struct_total[j].setPromedioEdfisica(cero);
+            }
+        } 
+        
+    }
+    for(unsigned int k=0;k<struct_total.size();k++)
+    {
+        if (struct_total[k].getPromedioGeneral() == cero || struct_total[k].getPromedioLenguaje() == cero || struct_total[k].getPromedioMatematicas() == cero
+        || struct_total[k].getPromedioIngles() == cero || struct_total[k].getPromedioCiencias() == cero || struct_total[k].getPromedioHistoria() == cero
+        || struct_total[k].getPromedioTecnologia() == cero || struct_total[k].getPromedioArtes() == cero || struct_total[k].getPromedioEdfisica() == cero){}
+        else{
+            resultado.push_back(struct_total[k]);}
+    }
+
+    return resultado;
 }

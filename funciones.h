@@ -50,13 +50,18 @@ struct datosEstudiantes
     const float getPromedioArtes(){return promedio_artes;}
     const float getPromedioEdfisica(){return promedio_edfisica;}
     const float getPromedioGeneral(){return promedio_general;}
+    const float getPromedioArtesyEdfisica(){return ((promedio_artes + promedio_edfisica)/2);}
+    const float getPromedioLenguayHistoria(){return ((promedio_lenguaje + promedio_historia)/2);}
+    const float getPromedioTecMateCiencias(){return ((promedio_tecnologia + promedio_matematicas + promedio_ciencias)/3);}
+
 };
 
-//vector<string> leer_archivo();
-void leer();
+
 string cambiar_comilla_por_cero(string sentencia);
 vector<datosEstudiantes> llenar_struct(string archivo);
-vector<datosEstudiantes> Orden_MayorMenor(vector<datosEstudiantes> struct_total);
+vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct_total,int opcion_de_promedio);
+vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_total, int opcion_de_orden);
+vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudiantes> struct_total, vector<datosEstudiantes> struct_seleccionados);
 
 
 #endif /* FUNCIONES_H */
