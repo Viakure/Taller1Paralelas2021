@@ -62,7 +62,10 @@ vector<datosEstudiantes> llenar_struct(string archivo);
 vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct_total,int opcion_de_promedio);
 vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_total, int opcion_de_orden);
 vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudiantes> struct_total, vector<datosEstudiantes> struct_seleccionados);
+<<<<<<< HEAD
 void llenar_csv (vector<datosEstudiantes> e, int opcion);
+=======
+>>>>>>> rama_ip
 
 
 #endif /* FUNCIONES_H */

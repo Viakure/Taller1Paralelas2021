@@ -2,10 +2,15 @@
 
 using namespace std;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> rama_ip
 string cambiar_comilla_por_cero(string sentencia)
 {
     //comillas dobles en ascii = 34
     char string_sin_comillas[999999];
+<<<<<<< HEAD
     for (unsigned int i = 0; i < sentencia.size(); i++)
     {
         if (sentencia.at(i) != 34)
@@ -20,6 +25,19 @@ string cambiar_comilla_por_cero(string sentencia)
     string resultado = string_sin_comillas;
     return resultado;
 }
+=======
+    for (unsigned int i=0;i<sentencia.size();i++)
+    {
+        if (sentencia.at(i)!=34)
+            {string_sin_comillas[i] = sentencia.at(i);}
+        else {string_sin_comillas[i] = '0';}
+    }
+    string resultado = string_sin_comillas;
+    return resultado;
+    }
+
+
+>>>>>>> rama_ip
 
 vector<datosEstudiantes> llenar_struct(string archivo)
 {
@@ -27,12 +45,18 @@ vector<datosEstudiantes> llenar_struct(string archivo)
     datosEstudiantes *estudiante = new datosEstudiantes[15000];
     ifstream lectura;
     lectura.open(archivo);
+<<<<<<< HEAD
     int cont = 0;
     for (string linea; getline(lectura, linea);)
+=======
+    int cont=0;
+    for (string linea; getline(lectura, linea); )
+>>>>>>> rama_ip
     {
         stringstream registro(linea);
         string dato;
         cont++;
+<<<<<<< HEAD
         for (int columna = 0; getline(registro, dato, ';'); ++columna)
         {
             switch (columna)
@@ -68,14 +92,58 @@ vector<datosEstudiantes> llenar_struct(string archivo)
                 estudiante[cont].promedio_edfisica = stof(cambiar_comilla_por_cero(dato).c_str());
                 break;
             }
+=======
+        for (int columna=0 ; getline(registro, dato, ';'); ++columna)
+        {
+            switch(columna)
+            {
+                case 0: //ID
+                    estudiante[cont].id = dato;
+                break;
+                case 1: // NOMBRE
+                    estudiante[cont].nombre = dato;
+                break;
+                case 2: // PROMEDIO LENGUAJE
+                    estudiante[cont].promedio_lenguaje = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 3: // PROMEDIO INGLES
+                    estudiante[cont].promedio_ingles = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 4: // PROMEDIO MATEMATICAS
+                    estudiante[cont].promedio_matematicas = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 5: // PROMEDIO CIENCIAS
+                    estudiante[cont].promedio_ciencias = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 6: // PROMEDIO HISTORIA
+                    estudiante[cont].promedio_historia = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 7: // PROMEDIO TECNOLOGIA
+                    estudiante[cont].promedio_tecnologia = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 8: // PROMEDIO ARTES
+                    estudiante[cont].promedio_artes = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+                case 9: // PROMEDIO ED. FISICA
+                    estudiante[cont].promedio_edfisica = stof(cambiar_comilla_por_cero(dato).c_str());
+                break;
+            }       
+>>>>>>> rama_ip
         }
         estudiante[cont].setPromedioGeneral();
         result.push_back(estudiante[cont]);
     }
     return result;
+<<<<<<< HEAD
 }
 
 vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct_total, int opcion_de_promedio)
+=======
+        
+}
+
+vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct_total,int opcion_de_promedio)
+>>>>>>> rama_ip
 {
     /* 
     OPCION DE ORDEN:
@@ -85,6 +153,7 @@ vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct
         4: Promedio Tecnología Mate y Ciencias
     */
     vector<datosEstudiantes> struct_ordenado;
+<<<<<<< HEAD
     string aux_id, aux_nombre;
     float aux_proml, aux_promi, aux_promm, aux_promc, aux_promh, aux_proma, aux_promt, aux_prome, aux_promg;
     for (unsigned int i = 0; i < struct_total.size(); i++)
@@ -94,6 +163,17 @@ vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct
             if (opcion_de_promedio == 1)
             {
                 if (struct_total[i].getPromedioGeneral() < struct_total[j].getPromedioGeneral())
+=======
+    string aux_id,aux_nombre;
+    float aux_proml,aux_promi,aux_promm,aux_promc,aux_promh,aux_proma,aux_promt,aux_prome,aux_promg;
+    for (unsigned int i=0;i<struct_total.size();i++)
+    {
+        for (unsigned int j = i+1; j<struct_total.size();j++)
+        {
+            if (opcion_de_promedio == 1)
+            {
+                if (struct_total[i].getPromedioGeneral()<struct_total[j].getPromedioGeneral())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -134,7 +214,11 @@ vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct
             }
             if (opcion_de_promedio == 2)
             {
+<<<<<<< HEAD
                 if (struct_total[i].getPromedioArtesyEdfisica() < struct_total[j].getPromedioArtesyEdfisica())
+=======
+                if (struct_total[i].getPromedioArtesyEdfisica()<struct_total[j].getPromedioArtesyEdfisica())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -175,7 +259,11 @@ vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct
             }
             if (opcion_de_promedio == 3)
             {
+<<<<<<< HEAD
                 if (struct_total[i].getPromedioLenguayHistoria() < struct_total[j].getPromedioLenguayHistoria())
+=======
+                if (struct_total[i].getPromedioLenguayHistoria()<struct_total[j].getPromedioLenguayHistoria())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -216,7 +304,11 @@ vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct
             }
             if (opcion_de_promedio == 4)
             {
+<<<<<<< HEAD
                 if (struct_total[i].getPromedioTecMateCiencias() < struct_total[j].getPromedioTecMateCiencias())
+=======
+                if (struct_total[i].getPromedioTecMateCiencias()<struct_total[j].getPromedioTecMateCiencias())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -256,8 +348,14 @@ vector<datosEstudiantes> primeros_cien_promedios(vector<datosEstudiantes> struct
                 }
             }
         }
+<<<<<<< HEAD
     }
     for (unsigned int k = 0; k < 100; k++)
+=======
+        
+    }
+    for (unsigned int k = 0; k<100 ; k++)
+>>>>>>> rama_ip
     {
         struct_ordenado.push_back(struct_total[k]);
     }
@@ -275,6 +373,7 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
         5: POR ID
     */
     vector<datosEstudiantes> struct_ordenado;
+<<<<<<< HEAD
     string aux_id, aux_nombre;
     float aux_proml, aux_promi, aux_promm, aux_promc, aux_promh, aux_proma, aux_promt, aux_prome, aux_promg;
     for (unsigned int i = 0; i < struct_total.size(); i++)
@@ -284,6 +383,17 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
             if (opcion_de_orden == 1)
             {
                 if (struct_total[i].getPromedioGeneral() < struct_total[j].getPromedioGeneral())
+=======
+    string aux_id,aux_nombre;
+    float aux_proml,aux_promi,aux_promm,aux_promc,aux_promh,aux_proma,aux_promt,aux_prome,aux_promg;
+    for (unsigned int i=0;i<struct_total.size();i++)
+    {
+        for (unsigned int j = i+1; j<struct_total.size();j++)
+        {
+            if (opcion_de_orden == 1)
+            {
+                if (struct_total[i].getPromedioGeneral()<struct_total[j].getPromedioGeneral())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -325,7 +435,11 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
 
             if (opcion_de_orden == 2)
             {
+<<<<<<< HEAD
                 if (struct_total[i].getPromedioArtesyEdfisica() < struct_total[j].getPromedioArtesyEdfisica())
+=======
+                if (struct_total[i].getPromedioArtesyEdfisica()<struct_total[j].getPromedioArtesyEdfisica())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -366,7 +480,11 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
             }
             if (opcion_de_orden == 3)
             {
+<<<<<<< HEAD
                 if (struct_total[i].getPromedioLenguayHistoria() < struct_total[j].getPromedioLenguayHistoria())
+=======
+                if (struct_total[i].getPromedioLenguayHistoria()<struct_total[j].getPromedioLenguayHistoria())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -407,7 +525,11 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
             }
             if (opcion_de_orden == 4)
             {
+<<<<<<< HEAD
                 if (struct_total[i].getPromedioTecMateCiencias() < struct_total[j].getPromedioTecMateCiencias())
+=======
+                if (struct_total[i].getPromedioTecMateCiencias()<struct_total[j].getPromedioTecMateCiencias())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -451,7 +573,11 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
                 /*int x,y;
                 x = struct_total[i].getIdInt();
                 y = struct_total[j].getIdInt();*/
+<<<<<<< HEAD
                 if (struct_total[i].getNombre() > struct_total[j].getNombre())
+=======
+                if (struct_total[i].getNombre()>struct_total[j].getNombre())
+>>>>>>> rama_ip
                 {
                     aux_promg = struct_total[j].getPromedioGeneral();
                     aux_id = struct_total[j].getId();
@@ -491,8 +617,14 @@ vector<datosEstudiantes> mayor_menor_promedio(vector<datosEstudiantes> struct_to
                 }
             }
         }
+<<<<<<< HEAD
     }
     for (unsigned int k = 0; k < struct_total.size(); k++)
+=======
+        
+    }
+    for (unsigned int k = 0; k<struct_total.size() ; k++)
+>>>>>>> rama_ip
     {
         struct_ordenado.push_back(struct_total[k]);
     }
@@ -503,12 +635,21 @@ vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudian
 {
     vector<datosEstudiantes> resultado;
     float cero = 0.0;
+<<<<<<< HEAD
     for (unsigned int i = 0; i < struct_seleccionados.size(); i++)
     {
         string aux = struct_seleccionados[i].getId();
         for (unsigned int j = 0; j < struct_total.size(); j++)
         {
             if (struct_total[j].getId() == aux)
+=======
+    for (unsigned int i=0;i<struct_seleccionados.size();i++)
+    {
+        string aux = struct_seleccionados[i].getId();
+        for (unsigned int j=0;j<struct_total.size();j++)
+        {
+            if (struct_total[j].getId() == aux )
+>>>>>>> rama_ip
             {
                 struct_total[j].setId("eliminado");
                 struct_total[j].setNombre("eliminado");
@@ -522,6 +663,7 @@ vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudian
                 struct_total[j].setPromedioArtes(cero);
                 struct_total[j].setPromedioEdfisica(cero);
             }
+<<<<<<< HEAD
         }
     }
     for (unsigned int k = 0; k < struct_total.size(); k++)
@@ -594,3 +736,19 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)                         
         archivo.close();
     }
 }
+=======
+        } 
+        
+    }
+    for(unsigned int k=0;k<struct_total.size();k++)
+    {
+        if (struct_total[k].getPromedioGeneral() == cero || struct_total[k].getPromedioLenguaje() == cero || struct_total[k].getPromedioMatematicas() == cero
+        || struct_total[k].getPromedioIngles() == cero || struct_total[k].getPromedioCiencias() == cero || struct_total[k].getPromedioHistoria() == cero
+        || struct_total[k].getPromedioTecnologia() == cero || struct_total[k].getPromedioArtes() == cero || struct_total[k].getPromedioEdfisica() == cero){}
+        else{
+            resultado.push_back(struct_total[k]);}
+    }
+
+    return resultado;
+}
+>>>>>>> rama_ip
