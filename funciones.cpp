@@ -526,7 +526,15 @@ vector<datosEstudiantes> eliminar_estudiantes_seleccionados(vector<datosEstudian
     }
     for (unsigned int k = 0; k < struct_total.size(); k++)
     {
-        if (struct_total[k].getPromedioGeneral() == cero || struct_total[k].getPromedioLenguaje() == cero || struct_total[k].getPromedioMatematicas() == cero || struct_total[k].getPromedioIngles() == cero || struct_total[k].getPromedioCiencias() == cero || struct_total[k].getPromedioHistoria() == cero || struct_total[k].getPromedioTecnologia() == cero || struct_total[k].getPromedioArtes() == cero || struct_total[k].getPromedioEdfisica() == cero)
+        if (struct_total[k].getPromedioGeneral() == cero
+         || struct_total[k].getPromedioLenguaje() == cero 
+         || struct_total[k].getPromedioMatematicas() == cero 
+         || struct_total[k].getPromedioIngles() == cero 
+         || struct_total[k].getPromedioCiencias() == cero 
+         || struct_total[k].getPromedioHistoria() == cero 
+         || struct_total[k].getPromedioTecnologia() == cero 
+         || struct_total[k].getPromedioArtes() == cero 
+         || struct_total[k].getPromedioEdfisica() == cero)
         {
         }
         else
@@ -543,12 +551,12 @@ void llenar_csv(vector<datosEstudiantes> e, int opcion)                         
     fstream archivo;                                                                            //Opcion de los 100 mejores promedios
     if (opcion == 1)
     {
-        fstream CreateFile("maximos.csv", ios::out);
-        CreateFile << "ID;Nombre;promedio general" << endl;
+        fstream CreateFile("maximos.csv", ios::out);                                            //Asignacion de nombre al .CSV
+        CreateFile << "ID;Nombre;promedio general" << endl;                                     //Creando las columnas del .CSV
         archivo.open("maximos.csv", ios::app);
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 100; i++)                                                           //Llenando el archivo según estudiantes solicitados
         {
-            archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].promedio_general << endl;
+            archivo << e[i].id << ";" << e[i].nombre << ";" << e[i].promedio_general << endl;   
         }
         archivo.close();
     }
