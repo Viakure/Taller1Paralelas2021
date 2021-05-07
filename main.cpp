@@ -17,6 +17,9 @@ using namespace std;
 */
 int main(int argc, char** argv)
 {
+    unsigned t0, t1;
+ 
+    t0=clock();
     /* 
     OPCION DE ORDEN:
         1: promedio general
@@ -78,8 +81,12 @@ int main(int argc, char** argv)
     cout<<" Nicolas Ipinza  "<<endl;
     cout<<" Ian Poveda      "<<endl;
     cout<<"-----------------"<<endl;
-
+    t1 = clock();
+    
+    double time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Tiempo de ejecución: " << time << endl;
     exit(EXIT_SUCCESS);
     return 0;
+
 
 }
