@@ -49,7 +49,7 @@ _3. Ejecutar el proyecto_
   _Se ejecuta el programa escribiendo en consola la ruta de Taller1 y la ruta del archivo con los estudiantes en formato .CSV._
 
 ```
-C:/Users/nicol/Downloads/T1/Taller1 C:/Users/nicolas/Documents/estudiantes.csv
+C:/Users/nicolas/Downloads/T1/Taller1 C:/Users/nicolas/Documents/estudiantes.csv
 ```
 
 ## Construido con 🛠️
